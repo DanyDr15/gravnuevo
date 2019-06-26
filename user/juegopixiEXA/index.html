@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>PIXI Concentration</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+		<script src="pixi.dev.js"></script>
+		<script src="pixi-sound.js"></script><!--LIBRERIA DE SONIDO-->
+		<script src="pixi-sound.js"></script><!--LIBRERIA DE SONIDO-->
+	<!--	<script src="https://cdn.jsdelivr.net/npm/pixi-sound@3.0.3/dist/pixi-sound.cjs.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/pixi-sound@3.0.3/dist/pixi-sound.js"></script>
+		<script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
+	-->
+		
+
+	</head>
+	<body>
+		<audio id="myAudio" controls>
+					<source src="iphone-notificacion.mp3" type="audio/mpeg">
+					
+				  </audio>				
+			
+			<!--  <button type="button" onclick="myFunction()">Set background image</button>  -->
+		
+
+	<script>
+		var x = document.getElementById("myAudio");//AUDIO
+
+  document.body.style.backgroundImage = "url('memo1.gif')";//poner imagen
+
+//	const app = new PIXI.Application();
+//document.body.appendChild(app.view);
+//	const background = PIXI.Sprite.from('flores.jpg');
+
+
+			// first tile picked up by the player
+			var firstTile=null;
+			// second tile picked up by the player
+			var secondTile=null;
+			// can the player pick up a tile?
+			var canPick=true;
+			// create an new instance of a pixi stage with a grey background
+			var stage = new PIXI.Stage(0x888888);
+			// create a renderer instance width=640 height=480
+			
+			var renderer = PIXI.autoDetectRenderer(315,315);
+			
+			//var renderer = PIXI.autoDetectRenderer(640,480);
+			// importing a texture atlas created with texturepacker
+			var tileAtlas = ["images.json"];
+			// create a new loader
+			var loader = new PIXI.AssetLoader(tileAtlas);
+			// create an empty container
+			var gameContainer = new PIXI.DisplayObjectContainer();
+			// add the container to the stage
+     		stage.addChild(gameContainer);
+     		// add the renderer view element to the DOM
+			document.body.appendChild(renderer.view);
+			// use callback
+			loader.onComplete = onTilesLoaded
+			//begin load
+			loader.load();	
+			function onTilesLoaded(){
+				// choose 24 random tile images
+				var chosenTiles=new Array();
+				while(chosenTiles.length<48){
+					var candidate=Math.floor(Math.random()*44);
+					if(chosenTiles.indexOf(candidate)==-1){
+						chosenTiles.push(candidate,candidate)
+					}			
+				}
+				
+				// shuffle the chosen tiles
+				for(i=0;i<96;i++){
+					var from = Math.floor(Math.random()*16);//cambio por que son 4 x4 y da para 16 cartas en total
+					var to = Math.floor(Math.random()*16);
+					var tmp = chosenTiles[from];
+					chosenTiles[from]=chosenTiles[to];
+					chosenTiles[to]=tmp;
+				}
+				// place down tiles
+				for(i=0;i<4;i++){ //cambio en columnas
+					for(j=0;j<4;j++){//cambio en filas
+						// new sprite
+						var tile = PIXI.Sprite.fromFrame(chosenTiles[i*4+j]);//cambio por el tamaño de las casillas
+						// buttonmode+interactive = acts like a button
+						tile.buttonMode=true;
+						tile.interactive = true;
+						// is the tile selected? // ¿Está seleccionada la ficha?
+						tile.isSelected=false;
+						// set a tile value // establecer un valor de mosaico
+						tile.theVal=chosenTiles[i*4+j]//tile.theVal=chosenTiles[i*6+j] //cambio por el tamaño de las casillas
+						// place the tile
+						tile.position.x = 7+i*80;
+						tile.position.y = 7+  j*80;
+						// paint tile black
+						tile.tint = 0x000000;
+						// set it a bit transparent (it will look grey)
+						tile.alpha=0.5;
+						// add the tile
+						gameContainer.addChild(tile);
+						var suma=20;
+						// mouse-touch listener
+						tile.mousedown = tile.touchstart = function(data){
+							// can I pick a tile? // ¿Puedo recoger una baldosa?
+							if(canPick) {
+							     // is the tile already selected? // ¿el mosaico ya está seleccionado?
+								if(!this.isSelected){
+									// set the tile to selected // establecer el mosaico a seleccionado
+									this.isSelected = true;
+									// show the tile
+				      				this.tint = 0xffffff;
+									this.alpha = 1;
+									// is it the first tile we uncover? // ¿Es la primera baldosa que descubrimos?
+									if(firstTile==null){
+										firstTile=this
+
+									}
+									// this is the second tile // esta es la segunda ficha
+									else{
+										secondTile=this
+										// can't pick anymore // ya no puedo elegir
+										canPick=false;
+
+
+										// did we pick the same tiles?
+										if(firstTile.theVal==secondTile.theVal){
+											
+// wait a second then remove the tiles and make the player able to pick again 
+// espere un segundo, luego retire las fichas y haga que el jugador pueda elegir nuevamente
+
+											setTimeout(function(){
+
+												gameContainer.removeChild(firstTile);
+												gameContainer.removeChild(secondTile);
+												firstTile=null;
+												secondTile=null;
+												canPick=true;
+												suma=suma+20;
+												x.autoplay = true;//AUDIIIO
+  x.load();//CARGE EL AUDIO
+
+
+								/*		const sound = PIXI.sound.Sound.from('resources/boing.mp3');
+sound.play();
+PIXI.sound.Sound.from({
+    url: 'resources/bird.mp3',
+    preload: true,
+    loaded: function(err, sound) {
+        sound.play();
+    }
+});
+*/
+											/*		<audio src="iphone-notificacion.mp3" autoplay>
+		</audio>*/
+		
+									/*			sounds.load([
+  "sounds/shoot.wav", 
+  "sounds/music.wav",
+  "sounds/bounce.mp3"
+]);
+var shoot = sounds["sounds/shoot.wav"],
+    music = sounds["sounds/music.wav"],
+	bounce = sounds["sounds/bounce.mp3"];
+	music.play();
+	music.volume = 0.7;  //// Establecer el volumen de música
+*/
+	
+
+/*PIXI.sound.add('bird', 'resources/bird.mp3');
+PIXI.sound.play('bird');*/
+
+
+/*PIXI.sound.add('boing', 'iphone-notificacion.mp3');
+PIXI.sound.play('boing');
+*/
+											},1000);
+										}
+										// we picked different tiles
+										else{
+											// wait a second then cover the tiles and make the player able to pick again
+								 			setTimeout(function(){
+												 
+								 				firstTile.isSelected=false
+								 				secondTile.isSelected=false
+								 				firstTile.tint = 0x000000;
+								 				secondTile.tint = 0x000000;
+								 				firstTile.alpha=0.5;
+								 				secondTile.alpha=0.5;
+								 				firstTile=null;
+												secondTile=null;
+												canPick=true	
+												suma=suma-2;
+												//document.write(suma);
+												document.getElementById("demo").innerHTML =suma; //TOTAL DEL SCRORE
+								 			},1000);
+										}
+									}	
+								}
+							}
+						}
+					}
+				} 
+				requestAnimFrame(animate);
+			}
+			function animate() {
+				requestAnimFrame(animate);
+				renderer.render(stage);
+			}
+
+
+		</script>
+		<p>SCRORE:</p>
+			  <p id="demo"> </p>
+	</body>
+</html>
