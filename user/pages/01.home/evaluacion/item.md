@@ -19,17 +19,8 @@ Los siguientes link:
 ![](img-css1.jpg)
 
 
-[js.-](https://www.w3schools.com/js/js_quiz.asp)
+[JS.-](https://www.w3schools.com/js/js_quiz.asp)
 ![](img-js1.jpg)
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141698790-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-141698790-1');
-</script>
 
 

@@ -2,20 +2,8 @@
 title: BANDERA
 ---
 
-
-<html>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141698790-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-141698790-1');
-</script>
-
-<body>
-
+<div>
+    
 <svg width="400" height="300">
   <rect width="400" height="300" style="fill:#31A031;stroke-width:3;stroke:#31A031" />
    <line x1="0" y1="0" x2="550" y2="400" style="stroke:yellow;stroke-width:28" /> <!-- PRIMERA LINEA-->
@@ -25,5 +13,4 @@ title: BANDERA
 
 </svg>
  
-</body>
-</html>
+    </div>
