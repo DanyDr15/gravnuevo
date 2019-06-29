@@ -16,9 +16,3 @@ custom_logo:
     type: image/png
     size: 1615
     path: user/themes/quark/images/logo/icons8-diseño-web-filled-64.png
-custom_logo_mobile:
-  user/themes/quark/images/logo/icons8-diseño-web-filled-64.png:
-    name: icons8-diseño-web-filled-64.png
-    type: image/png
-    size: 1615
-    path: user/themes/quark/images/logo/icons8-diseño-web-filled-64.png
