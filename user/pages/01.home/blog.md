@@ -18,13 +18,12 @@ content:
 <!--34F994   47FAB4   95AFAC gris-->
 <!--  <span style="color:#EEF909">some *This is Blue italic.* text</span>     #07F0D7  07F0D7  -->
 <style>  
-    
+   
 body{
    background-color: #F7B5F9;
     }
 
-</style>
-                               
+</style>    
 !! **ULTIMAS NOTICIAS**
 
 !!! **[Juego Examen](https://valeriaalvarezsis.com/juegos/juegoexamen)**
