@@ -1,6 +1,7 @@
 ---
 title: FOTO
 media_order: 27164212_1562802107139541_2163097532295044586_o.jpg
+published: false
 body_classes: modular
 content:
     items: '@self.modular'
